@@ -1,0 +1,57 @@
+//Atividade JavaScript
+//Turma: 963E / MAatricula: 2024100876 Júlio césar do nascimento silva 
+
+//Função para verificar se um número é primo 
+function isPrime(num: number): boolean {
+    //Verifica se o número é menor que 2, pois números menores que 2 não são primos
+    if (num < 2) {
+        return false;
+    }
+    
+    //Percorre todos os números de 2 até a raiz quadrada de num
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+        //Se num for divisível por qualquer número entre 2 e sua raiz quadrada, não é primo
+        if (num % i === 0) {
+            return false;
+        }
+    }
+    
+    //Se nenhum divisor foi encontrado, num é primo
+    return true;
+}
+
+//Função para encontrar os 10 maiores números primos a partir de um número inserido pelo usuário
+function findLargestPrimes(): void {
+    //Solicita ao usuário um número como entrada
+    let inputNumber: number = parseInt(prompt("Digite um número para encontrar os 10 maiores números primos a partir dele:") as string);
+    
+    //Verifica se o número inserido é válido
+    if (isNaN(inputNumber) || inputNumber < 2) {
+        console.log("Por favor, insira um número válido maior ou igual a 2.");
+        return;
+    }
+    
+    //Inicializa variáveis 
+    let primesFound: number = 0;
+    let currentNumber: number = inputNumber;
+    let largestPrimes: number[] = [];
+
+//Encontra os 10 maiores números primos a partir do número inserido
+    while (primesFound < 10) {
+        //Se o número atual for primo, adiciona na lista de maiores primos encontrados 
+        if (isPrime(currentNumber)) {
+            largestPrimes.push(currentNumber);
+            primesFound++;
+        }
+        currentNumber++;
+    }
+
+//Exibe os 10 maiores números primos encontrados
+    console.log("Os 10 maiores números primos a partir de " + inputNumber + " são:");
+    for (let i = largestPrimes.length - 1; i >= 0; i--) {
+        console.log(largestPrimes[i]);
+    }
+}
+
+// Chamada da função para encontrar os 10 maiores números primos a partir do número inserido pelo usuário
+findLargestPrimes();
